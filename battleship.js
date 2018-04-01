@@ -58,12 +58,16 @@ var gameBoard = [
 	[0,0,0,0,0,0,0,0,0,0],
 ];
 
-var y = Math.floor((Math.random() * 10));
-var x = Math.floor((Math.random() * 10));
-gameBoard[y][x] = 1;
+placeShip();
 
 // set event listener for all elements in gameboard, run fireTorpedo function when square is clicked
 gameBoardContainer.addEventListener("click", fireTorpedo, false);
+
+function placeShip() {	
+	var y = Math.floor((Math.random() * 10));
+	var x = Math.floor((Math.random() * 10));
+	gameBoard[y][x] = 1;
+}
 
 // initial code via http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
 function fireTorpedo(e) {
