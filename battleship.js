@@ -39,6 +39,7 @@ for (i = 0; i < cols; i++) {
 var hitCount = 0;
 var torpedoCount = 0;
 
+
 /* create the 2d array that will contain the status of each square on the board
    and place ships on the board (later, create function for random placement!)
 
@@ -75,6 +76,17 @@ function placeShip(length) {
 		gameBoard[y][x+i] = 1;
 	}
 
+}
+
+function cheat() {
+	for (x = 0; x<10; x++) {
+		for (y = 0; y<10; y++) {
+			if (gameBoard[y][x] == 1) {
+				var id="s" + y + x;
+				document.getElementById(id).style.background = 'red';
+			} 
+		}
+	}
 }
 
 // initial code via http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
