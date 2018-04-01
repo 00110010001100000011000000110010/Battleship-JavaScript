@@ -82,7 +82,6 @@ function placeShip(length) {
 	} while (retry && count<100);
 	if (count >= 100) alert("falied to find a place");
 	for (i = 0; i<length; i++) {
-		console.log(dir, i, x, y, y+i*(1-dir), x+i*dir);
 		gameBoard[y+i*(1-dir)][x+i*dir] = 1;
 	}
 }
