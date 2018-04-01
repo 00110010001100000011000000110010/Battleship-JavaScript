@@ -69,20 +69,21 @@ placeShip(5);
 gameBoardContainer.addEventListener("click", fireTorpedo, false);
 
 function placeShip(length) {
-	var x, y, retry, count=0;
+	var x, y, dir, retry, count=0;
 	do {
 		count++;
 		retry = false;
-		y = Math.floor((Math.random() * 10));
-		x = Math.floor((Math.random() * (10-length+1)));
+		dir = Math.floor((Math.random() * 2));
+		y = Math.floor((Math.random() * (10-(length-1)*(1-dir))));
+		x = Math.floor((Math.random() * (10-(length-1)*dir)));
 		for (var i = 0; i<length; i++) {
-			if (!isFree(x+i, y)) retry = true;
+			if (!isFree(x+i*dir, y+i*(1-dir))) retry = true;
 		}
 	} while (retry && count<100);
 	if (count >= 100) alert("falied to find a place");
 	for (i = 0; i<length; i++) {
-		console.log(y, x+i);
-		gameBoard[y][x+i] = 1;
+		console.log(dir, i, x, y, y+i*(1-dir), x+i*dir);
+		gameBoard[y+i*(1-dir)][x+i*dir] = 1;
 	}
 }
 
@@ -90,7 +91,6 @@ function isFree(x, y) {
 	for (var i=-1; i<=1; i++) {
 		for (var j=-1; j<=1; j++) {
 			if (y+j<0 || x+i<0 || y+j>=10 || x+i>=10) continue;
-			console.log('isFree', y+j, x+i);
 			if (gameBoard[y+j][x+i] == 1) {
 				return false;
 			}
