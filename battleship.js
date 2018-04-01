@@ -58,15 +58,19 @@ var gameBoard = [
 	[0,0,0,0,0,0,0,0,0,0],
 ];
 
-placeShip();
+placeShip(1);
 
 // set event listener for all elements in gameboard, run fireTorpedo function when square is clicked
 gameBoardContainer.addEventListener("click", fireTorpedo, false);
 
-function placeShip() {	
+function placeShip(length) {	
 	var y = Math.floor((Math.random() * 10));
 	var x = Math.floor((Math.random() * 10));
-	gameBoard[y][x] = 1;
+	for (i = 0; i<length; i++) {
+		console.log(y,x);
+		gameBoard[y][x + i] = 1;
+	}
+
 }
 
 // initial code via http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
