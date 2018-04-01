@@ -68,23 +68,44 @@ placeShip(5);
 // set event listener for all elements in gameboard, run fireTorpedo function when square is clicked
 gameBoardContainer.addEventListener("click", fireTorpedo, false);
 
-function placeShip(length) {	
-	var y = Math.floor((Math.random() * 10));
-	var x = Math.floor((Math.random() * (10-length+1)));
+function placeShip(length) {
+	var x, y, retry, count=0;
+	do {
+		count++;
+		retry = false;
+		y = Math.floor((Math.random() * 10));
+		x = Math.floor((Math.random() * (10-length+1)));
+		for (var i = 0; i<length; i++) {
+			if (!isFree(x+i, y)) retry = true;
+		}
+	} while (retry && count<100);
+	if (count >= 100) alert("falied to find a place");
 	for (i = 0; i<length; i++) {
 		console.log(y, x+i);
 		gameBoard[y][x+i] = 1;
 	}
+}
 
+function isFree(x, y) {
+	for (var i=-1; i<=1; i++) {
+		for (var j=-1; j<=1; j++) {
+			if (y+j<0 || x+i<0 || y+j>=10 || x+i>=10) continue;
+			console.log('isFree', y+j, x+i);
+			if (gameBoard[y+j][x+i] == 1) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 function cheat() {
-	for (x = 0; x<10; x++) {
-		for (y = 0; y<10; y++) {
+	for (var x = 0; x<10; x++) {
+		for (var y = 0; y<10; y++) {
 			if (gameBoard[y][x] == 1) {
 				var id="s" + y + x;
 				document.getElementById(id).style.background = 'red';
-			} 
+			}
 		}
 	}
 }
