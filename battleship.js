@@ -58,17 +58,17 @@ var gameBoard = [
 	[0,0,0,0,0,0,0,0,0,0],
 ];
 
-placeShip(1);
+placeShip(2);
 
 // set event listener for all elements in gameboard, run fireTorpedo function when square is clicked
 gameBoardContainer.addEventListener("click", fireTorpedo, false);
 
 function placeShip(length) {	
 	var y = Math.floor((Math.random() * 10));
-	var x = Math.floor((Math.random() * 10));
+	var x = Math.floor((Math.random() * (10-length+1)));
 	for (i = 0; i<length; i++) {
-		console.log(y,x);
-		gameBoard[y][x + i] = 1;
+		console.log(y, x+i);
+		gameBoard[y][x+i] = 1;
 	}
 
 }
